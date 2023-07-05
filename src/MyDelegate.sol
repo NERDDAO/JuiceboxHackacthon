@@ -113,7 +113,11 @@ contract MyDelegate is IJBFundingCycleDataSource, IJBPayDelegate, IJBRedemptionD
             }
         }
     }
-
+     
+    function _mint(address _to, uint256 _amount) internal virtual {
+        // Mint the tokens.
+        IJBToken(directory.projectTokenOf(projectId)).mint(_to, _amount);
+    }
     /// @notice Received hook from the payment terminal after a payment.
     /// @dev Reverts if the calling contract is not one of the project's terminals.
     /// @dev This example implementation reverts if the payer isn't on the allow list.
